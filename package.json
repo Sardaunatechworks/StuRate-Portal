@@ -1,0 +1,18 @@
+{
+  "name": "student-rating-teachers-effectiveness-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Student Rating Teachers' Effectiveness System - Monorepo Root",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "build:client": "npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "seed": "npm run prisma:seed --prefix server"
+  }
+}

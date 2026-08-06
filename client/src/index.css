@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f3f4f6] text-zinc-900 min-h-screen font-sans selection:bg-black selection:text-white antialiased transition-colors duration-200;
+  }
+  
+  html.dark body {
+    @apply bg-zinc-950 text-zinc-100 selection:bg-white selection:text-black;
+  }
+}
+
+.template-card {
+  @apply bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 rounded-2xl p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm transition-all duration-200;
+}
+
+.template-card-hover {
+  @apply hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700;
+}
+
+.template-btn-black {
+  @apply bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 font-semibold rounded-xl px-4 py-2.5 text-xs transition-all duration-200 shadow-sm active:scale-95 disabled:opacity-50;
+}
+
+.template-btn-outline {
+  @apply bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 font-semibold rounded-xl px-4 py-2.5 text-xs transition-all duration-200 shadow-sm;
+}
+
+.template-input {
+  @apply bg-zinc-100/80 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 focus:bg-white dark:focus:bg-zinc-900 transition-all placeholder-zinc-400 dark:placeholder-zinc-500;
+}
+
+.template-input-has-icon {
+  padding-left: 2.75rem !important;
+}
+
+.template-input-has-right-icon {
+  padding-right: 2.75rem !important;
+}
+
+/* Fix browser autofill styling in dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+}
+
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f4f4f5 !important;
+  -webkit-box-shadow: 0 0 0px 1000px #27272a inset !important;
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
