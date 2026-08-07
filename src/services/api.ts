@@ -4,13 +4,21 @@ import { User, Role } from '../types';
 
 // Production API URL handling with fallback to Render backend
 const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-const customApiUrl = (import.meta as any).env?.VITE_API_URL;
-const baseURL = customApiUrl || (isLocal ? '/api' : 'https://sturate-portal.onrender.com/api');
+const rawApiUrl = (import.meta as any).env?.VITE_API_URL;
+let formattedApiUrl = rawApiUrl;
+if (formattedApiUrl) {
+  formattedApiUrl = formattedApiUrl.trim().replace(/\/$/, '');
+  if (!formattedApiUrl.endsWith('/api')) {
+    formattedApiUrl = `${formattedApiUrl}/api`;
+  }
+}
 
+const baseURL = formattedApiUrl || (isLocal ? '/api' : 'https://sturate-portal-server-1.onrender.com/api');
 
 const API = axios.create({
   baseURL,
 });
+
 
 
 
