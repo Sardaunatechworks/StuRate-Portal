@@ -6,7 +6,8 @@ import { ModalProvider } from './context/ModalContext';
 import { SidebarProvider } from './context/SidebarContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
-// Pages
+// Landing & Auth Pages
+import { LandingPage } from './pages/LandingPage';
 import { Login } from './pages/Auth/Login';
 import { Signup } from './pages/Auth/Signup';
 
@@ -45,6 +46,8 @@ export const App: React.FC = () => {
           <SidebarProvider>
             <Router>
               <Routes>
+                {/* Public Landing & Auth Routes */}
+                <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signup/student" element={<Signup />} />
@@ -81,7 +84,7 @@ export const App: React.FC = () => {
                   <Route path="/lecturer/profile" element={<ProfilePage />} />
                 </Route>
 
-                <Route path="*" element={<Navigate to="/login" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Router>
           </SidebarProvider>

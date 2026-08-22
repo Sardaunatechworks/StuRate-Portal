@@ -64,16 +64,18 @@ export const Sidebar: React.FC = () => {
         {/* Brand Header */}
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex items-center -space-x-1">
-              <div className="w-5 h-5 rounded-full bg-white" />
-              <div className="w-5 h-5 rounded-full bg-white opacity-80" />
+            <div className="w-9 h-9 rounded-xl bg-gold-400 text-academic-950 flex items-center justify-center font-black text-sm shadow-md">
+              SR
             </div>
-            <h1 className="font-extrabold text-white text-lg tracking-tight">Learning</h1>
+            <div>
+              <h1 className="font-extrabold text-white text-sm tracking-tight leading-none">StuRate</h1>
+              <p className="text-[10px] text-academic-300 mt-0.5 uppercase tracking-wider">Portal</p>
+            </div>
           </div>
           {/* Close button for mobile drawer */}
           <button
             onClick={closeMobileSidebar}
-            className="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+            className="md:hidden p-1.5 rounded-lg text-academic-300 hover:text-white hover:bg-white/10 transition-colors"
           >
             <X size={20} />
           </button>
@@ -91,8 +93,8 @@ export const Sidebar: React.FC = () => {
                 className={({ isActive }) =>
                   `flex items-center gap-3.5 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${
                     isActive
-                      ? 'bg-zinc-900 text-white font-bold'
-                      : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50'
+                      ? 'bg-white/15 text-white font-bold border-l-[3px] border-gold-400 pl-3.5'
+                      : 'text-academic-300 hover:text-white hover:bg-white/10'
                   }`
                 }
               >
@@ -105,11 +107,11 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* User Info & Logout Button */}
-      <div className="p-4 border-t border-zinc-900">
-        <div className="p-3 bg-zinc-900/80 rounded-xl flex items-center justify-between">
+      <div className="p-4 border-t border-white/10">
+        <div className="p-3 bg-white/10 rounded-xl flex items-center justify-between backdrop-blur-sm">
           <div className="truncate">
             <p className="text-xs font-bold text-white truncate">{user.name}</p>
-            <p className="text-[10px] text-zinc-400 font-mono capitalize">{user.role.toLowerCase()}</p>
+            <p className="text-[10px] text-academic-300 font-mono capitalize">{user.role.toLowerCase()}</p>
           </div>
           <button
             onClick={() => {
@@ -117,7 +119,7 @@ export const Sidebar: React.FC = () => {
               logout();
             }}
             title="Logout"
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+            className="p-1.5 rounded-lg text-academic-300 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
           >
             <LogOut size={16} />
           </button>
@@ -129,7 +131,7 @@ export const Sidebar: React.FC = () => {
   return (
     <>
       {/* Desktop Sidebar (hidden on mobile, visible md+) */}
-      <aside className="w-64 bg-black text-white flex flex-col justify-between hidden md:flex min-h-screen shrink-0 border-r border-zinc-900">
+      <aside className="w-64 bg-gradient-to-b from-[#004225] to-[#006838] text-white flex flex-col justify-between hidden md:flex min-h-screen shrink-0 border-r border-academic-800/50">
         {navContent}
       </aside>
 
@@ -143,7 +145,7 @@ export const Sidebar: React.FC = () => {
 
       {/* Mobile Sidebar Slide-over Drawer */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-black text-white flex flex-col justify-between shadow-2xl transition-transform duration-300 transform md:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-[#004225] to-[#006838] text-white flex flex-col justify-between shadow-2xl transition-transform duration-300 transform md:hidden ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

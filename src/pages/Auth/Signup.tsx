@@ -139,35 +139,35 @@ export const Signup: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex items-center justify-center p-3 sm:p-6 md:p-10 transition-colors duration-200">
+    <div className="min-h-screen w-full bg-academic-50 dark:bg-[#0C1A12] text-[#1A2E22] dark:text-zinc-100 flex items-center justify-center p-3 sm:p-6 md:p-10 transition-colors duration-200">
       
       {/* Container: Single card on mobile/tablet, Split panel layout on Large screens */}
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/80 dark:border-zinc-800/80">
+      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 bg-white dark:bg-[#142620] rounded-3xl overflow-hidden shadow-2xl border border-academic-200/80 dark:border-academic-800/60">
         
         {/* Left Side Hero Banner (Visible on lg: screens) */}
-        <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white p-10 flex-col justify-between relative overflow-hidden">
+        <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-[#004225] via-[#003820] to-[#002415] text-white p-10 flex-col justify-between relative overflow-hidden">
           
           {/* Ambient Glow */}
-          <div className="absolute -top-24 -left-24 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 -left-24 w-72 h-72 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Top Branding */}
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-white text-black flex items-center justify-center font-black text-lg shadow-md shrink-0">
+              <div className="w-11 h-11 rounded-2xl bg-gold-400 text-academic-950 flex items-center justify-center font-black text-lg shadow-md shrink-0">
                 SR
               </div>
               <div>
                 <h3 className="font-extrabold text-sm tracking-tight text-white leading-none">StuRate Portal</h3>
-                <p className="text-[11px] text-zinc-400 mt-1">Teacher Effectiveness System</p>
+                <p className="text-[11px] text-academic-300 mt-1">Teacher Effectiveness System</p>
               </div>
             </div>
 
             <div className="pt-6 space-y-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-blue-300 text-xs font-semibold backdrop-blur-md border border-white/10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-gold-300 text-xs font-semibold backdrop-blur-md border border-white/10">
                 <Sparkles size={14} /> Student Registration
               </span>
-              <h2 className="text-2xl font-black text-white leading-tight">
+              <h2 className="text-2xl font-serif font-bold text-white leading-tight">
                 Empower Academic Excellence Through Honest Feedback
               </h2>
             </div>
@@ -179,31 +179,31 @@ export const Signup: React.FC = () => {
               <ShieldCheck className="text-emerald-400 shrink-0 mt-0.5" size={20} />
               <div>
                 <h4 className="text-xs font-bold text-white">100% Anonymous Ratings</h4>
-                <p className="text-[11px] text-zinc-400 mt-0.5">Your evaluations are completely detached from your personal student ID.</p>
+                <p className="text-[11px] text-academic-300 mt-0.5">Your evaluations are completely detached from your personal student ID.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <Award className="text-blue-400 shrink-0 mt-0.5" size={20} />
+              <Award className="text-gold-400 shrink-0 mt-0.5" size={20} />
               <div>
                 <h4 className="text-xs font-bold text-white">Improve Teaching Quality</h4>
-                <p className="text-[11px] text-zinc-400 mt-0.5">Directly influence course delivery and instructional methodologies.</p>
+                <p className="text-[11px] text-academic-300 mt-0.5">Directly influence course delivery and instructional methodologies.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <BarChart3 className="text-indigo-400 shrink-0 mt-0.5" size={20} />
+              <BarChart3 className="text-academic-400 shrink-0 mt-0.5" size={20} />
               <div>
                 <h4 className="text-xs font-bold text-white">Real-Time Evaluation Dashboards</h4>
-                <p className="text-[11px] text-zinc-400 mt-0.5">Track your pending course evaluations and completion history effortlessly.</p>
+                <p className="text-[11px] text-academic-300 mt-0.5">Track your pending course evaluations and completion history effortlessly.</p>
               </div>
             </div>
           </div>
 
           {/* Footer Quote */}
-          <div className="relative z-10 pt-4 border-t border-white/10 text-[11px] text-zinc-400 flex items-center justify-between">
+          <div className="relative z-10 pt-4 border-t border-white/10 text-[11px] text-academic-400 flex items-center justify-between">
             <span>Official University Evaluation System</span>
-            <span className="font-semibold text-zinc-300">2026 Academic Session</span>
+            <span className="font-semibold text-gold-300">2026 Academic Session</span>
           </div>
         </div>
 
@@ -212,23 +212,23 @@ export const Signup: React.FC = () => {
           
           {/* Mobile Header */}
           <div className="lg:hidden text-center mb-6 space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto shadow-md font-bold text-lg mb-2">
+            <div className="w-12 h-12 rounded-2xl bg-academic-700 dark:bg-gold-400 text-white dark:text-academic-950 flex items-center justify-center mx-auto shadow-md font-bold text-lg mb-2">
               SR
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#1A2E22] dark:text-zinc-100">
               Student Registration
             </h1>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-[#4A6350] dark:text-academic-400">
               Student Rating Teachers' Effectiveness System
             </p>
           </div>
 
           {/* Form Header for Desktop */}
           <div className="hidden lg:block mb-6 space-y-1">
-            <h1 className="text-2xl font-extrabold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <h1 className="text-2xl font-extrabold text-[#1A2E22] dark:text-zinc-100 tracking-tight">
               Create Your Student Account
             </h1>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-[#4A6350] dark:text-academic-400">
               Fill in your academic information to register for course evaluations.
             </p>
           </div>
@@ -248,11 +248,11 @@ export const Signup: React.FC = () => {
               
               {/* Full Name */}
               <div className="sm:col-span-2">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Full Name <span className="text-red-500">*</span>
                 </label>
                 <div className="relative flex items-center">
-                  <User className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <User className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <input
                     type="text"
                     required
@@ -266,11 +266,11 @@ export const Signup: React.FC = () => {
 
               {/* Student Email */}
               <div className="sm:col-span-1">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Email Address <span className="text-red-500">*</span>
                 </label>
                 <div className="relative flex items-center">
-                  <Mail className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <Mail className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <input
                     type="email"
                     required
@@ -284,11 +284,11 @@ export const Signup: React.FC = () => {
 
               {/* Registration / Matric Number */}
               <div className="sm:col-span-1">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Registration / Matric No. <span className="text-red-500">*</span>
                 </label>
                 <div className="relative flex items-center">
-                  <FileText className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <FileText className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <input
                     type="text"
                     required
@@ -303,21 +303,21 @@ export const Signup: React.FC = () => {
               {/* Department */}
               <div className="sm:col-span-1">
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                  <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300">
                     Department <span className="text-red-500">*</span>
                   </label>
                   <button
                     type="button"
                     onClick={fetchDepartments}
                     title="Reload Departments"
-                    className="text-[11px] text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 transition-colors"
+                    className="text-[11px] text-[#4A6350] hover:text-academic-700 dark:hover:text-white flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={11} className={loadingDepartments ? 'animate-spin' : ''} />
                     <span>Refresh</span>
                   </button>
                 </div>
                 <div className="relative flex items-center">
-                  <Building2 className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <Building2 className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <select
                     required
                     value={departmentId}
@@ -335,7 +335,7 @@ export const Signup: React.FC = () => {
 
               {/* Academic Level */}
               <div className="sm:col-span-1">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Academic Level <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -354,11 +354,11 @@ export const Signup: React.FC = () => {
 
               {/* Password */}
               <div className="sm:col-span-1">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Password <span className="text-red-500">*</span>
                 </label>
                 <div className="relative flex items-center">
-                  <Lock className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <Lock className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
@@ -370,7 +370,7 @@ export const Signup: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 z-10 p-1"
+                    className="absolute right-3 text-[#4A6350] hover:text-academic-700 dark:hover:text-zinc-200 z-10 p-1"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -379,11 +379,11 @@ export const Signup: React.FC = () => {
 
               {/* Confirm Password */}
               <div className="sm:col-span-1">
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2E22] dark:text-academic-300 mb-1.5">
                   Confirm Password <span className="text-red-500">*</span>
                 </label>
                 <div className="relative flex items-center">
-                  <Lock className="absolute left-3.5 text-zinc-400 pointer-events-none z-10" size={18} />
+                  <Lock className="absolute left-3.5 text-[#4A6350] pointer-events-none z-10" size={18} />
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     required
@@ -395,7 +395,7 @@ export const Signup: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 z-10 p-1"
+                    className="absolute right-3 text-[#4A6350] hover:text-academic-700 dark:hover:text-zinc-200 z-10 p-1"
                   >
                     {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -423,7 +423,7 @@ export const Signup: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full template-btn-black h-12 text-sm flex items-center justify-center gap-2 shadow-lg mt-3"
+              className="w-full template-btn-primary h-12 text-sm flex items-center justify-center gap-2 shadow-lg mt-3"
             >
               {isLoading ? (
                 <span>Creating Student Account...</span>
@@ -437,16 +437,16 @@ export const Signup: React.FC = () => {
           </form>
 
           {/* Footer Switch to Login */}
-          <div className="mt-6 pt-5 border-t border-zinc-200 dark:border-zinc-800 text-center space-y-3">
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">
+          <div className="mt-6 pt-5 border-t border-academic-200 dark:border-academic-800 text-center space-y-3">
+            <p className="text-xs text-[#4A6350] dark:text-academic-400">
               Already have a student account?{' '}
-              <Link to="/login" className="font-extrabold text-black dark:text-white underline hover:opacity-80">
+              <Link to="/login" className="font-extrabold text-academic-700 dark:text-gold-400 underline hover:opacity-80">
                 Sign In to Portal
               </Link>
             </p>
 
-            <div className="p-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 text-[11px] text-zinc-600 dark:text-zinc-400 flex items-center gap-2.5">
-              <ShieldCheck size={18} className="text-black dark:text-white shrink-0" />
+            <div className="p-3 rounded-2xl bg-academic-50 dark:bg-academic-900/30 text-[11px] text-[#4A6350] dark:text-academic-400 flex items-center gap-2.5">
+              <ShieldCheck size={18} className="text-academic-700 dark:text-gold-400 shrink-0" />
               <span className="leading-tight text-left">
                 Strictly for <strong>Students</strong>. Administrative and Lecturer access accounts are created by University Admins.
               </span>

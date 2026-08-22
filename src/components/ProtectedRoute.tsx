@@ -23,7 +23,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
   }
 
   return (
-    <div className="flex min-h-screen bg-[#f3f4f6] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+    <div className="flex min-h-screen bg-academic-50 dark:bg-[#0C1A12] text-[#1A2E22] dark:text-zinc-100 transition-colors duration-200">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <Header />
