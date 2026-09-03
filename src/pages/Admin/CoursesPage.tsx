@@ -24,10 +24,11 @@ export const CoursesPage: React.FC = () => {
         API.get('/admin/courses'),
         API.get('/admin/departments')
       ]);
-      setCourses(coursesRes.data);
-      setDepartments(deptsRes.data);
-      if (deptsRes.data.length > 0 && !formData.departmentId) {
-        setFormData(prev => ({ ...prev, departmentId: deptsRes.data[0].id }));
+      const cleanDepts = (deptsRes.data || []).filter((d: any) => d.code !== 'EEE' && !d.name.toLowerCase().includes('electrical'));
+      setCourses((coursesRes.data || []).filter((c: any) => c.code?.substring(0, 3) !== 'EEE' && !c.department?.name?.toLowerCase().includes('electrical')));
+      setDepartments(cleanDepts);
+      if (cleanDepts.length > 0 && !formData.departmentId) {
+        setFormData(prev => ({ ...prev, departmentId: cleanDepts[0].id }));
       }
     } catch (err) {
       console.error('Error fetching courses data:', err);

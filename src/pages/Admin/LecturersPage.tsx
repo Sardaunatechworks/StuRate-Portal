@@ -25,10 +25,11 @@ export const LecturersPage: React.FC = () => {
         API.get('/admin/lecturers'),
         API.get('/admin/departments')
       ]);
-      setLecturers(lecsRes.data);
-      setDepartments(deptsRes.data);
-      if (deptsRes.data.length > 0 && !formData.departmentId) {
-        setFormData(prev => ({ ...prev, departmentId: deptsRes.data[0].id }));
+      const cleanDepts = (deptsRes.data || []).filter((d: any) => d.code !== 'EEE' && !d.name.toLowerCase().includes('electrical'));
+      setLecturers((lecsRes.data || []).filter((l: any) => l.staffId?.includes('/EEE/') !== true && !l.department?.name?.toLowerCase().includes('electrical')));
+      setDepartments(cleanDepts);
+      if (cleanDepts.length > 0 && !formData.departmentId) {
+        setFormData(prev => ({ ...prev, departmentId: cleanDepts[0].id }));
       }
     } catch (err) {
       console.error('Error fetching lecturers:', err);

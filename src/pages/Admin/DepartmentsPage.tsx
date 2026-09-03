@@ -14,7 +14,7 @@ export const DepartmentsPage: React.FC = () => {
   const fetchDepartments = async () => {
     try {
       const res = await API.get('/admin/departments');
-      setDepartments(res.data);
+      setDepartments((res.data || []).filter((d: any) => d.code !== 'EEE' && !d.name.toLowerCase().includes('electrical')));
     } catch (err) {
       console.error('Error fetching departments:', err);
     } finally {

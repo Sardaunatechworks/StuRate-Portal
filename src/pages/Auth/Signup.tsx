@@ -61,8 +61,32 @@ export const Signup: React.FC = () => {
     try {
       const res = await API.get('/auth/departments');
       if (Array.isArray(res.data) && res.data.length > 0) {
-        setDepartments(res.data);
-        setDepartmentId(res.data[0].id);
+        // Exclude Electrical Engineering / EEE and normalize codes
+        const validFromApi = (res.data as DepartmentOption[])
+          .filter(d => d.code !== 'EEE' && !d.name.toLowerCase().includes('electrical'))
+          .map(d => {
+            if (d.code === 'CYS' || d.name.toLowerCase().includes('cyber')) {
+              return { ...d, code: 'CYB', name: 'Cybersecurity' };
+            }
+            if (d.code === 'IT' || d.name.toLowerCase().includes('information technology')) {
+              return { ...d, code: 'CIT', name: 'Information Technology' };
+            }
+            if (d.code === 'SEN' || d.name.toLowerCase().includes('software engineering')) {
+              return { ...d, code: 'CSE', name: 'Software Engineering' };
+            }
+            return d;
+          });
+
+        // Merge with FALLBACK_DEPARTMENTS so all 4 departments are always present
+        const combined = [...validFromApi];
+        FALLBACK_DEPARTMENTS.forEach(fb => {
+          if (!combined.some(d => d.code === fb.code)) {
+            combined.push(fb);
+          }
+        });
+
+        setDepartments(combined);
+        setDepartmentId(combined[0]?.id || FALLBACK_DEPARTMENTS[0].id);
         setUsingFallback(false);
       } else {
         setDepartments(FALLBACK_DEPARTMENTS);
