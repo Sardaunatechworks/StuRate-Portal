@@ -30,10 +30,9 @@ interface DepartmentOption {
 
 const FALLBACK_DEPARTMENTS: DepartmentOption[] = [
   { id: 'csc-fallback', code: 'CSC', name: 'Computer Science' },
-  { id: 'eee-fallback', code: 'EEE', name: 'Electrical & Electronic Engineering' },
-  { id: 'it-fallback', code: 'IT', name: 'Information Technology' },
-  { id: 'cys-fallback', code: 'CYS', name: 'Cyber Security' },
-  { id: 'sen-fallback', code: 'SEN', name: 'Software Engineering' },
+  { id: 'cse-fallback', code: 'CSE', name: 'Software Engineering' },
+  { id: 'cyb-fallback', code: 'CYB', name: 'Cybersecurity' },
+  { id: 'cit-fallback', code: 'CIT', name: 'Information Technology' },
 ];
 
 export const Signup: React.FC = () => {
