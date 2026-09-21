@@ -21,8 +21,10 @@ server/dev.db-journal
 # Environment variables
 .env
 *.env
+**/.env
+**/*.env
 !.env.example
-server/.env
+!**/.env.example
 
 # Logs
 *.log
