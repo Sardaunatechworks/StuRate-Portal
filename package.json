@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Student Rating Teachers' Effectiveness System (SRTES) - University Final-Year Project",
   "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "build:server": "npm --prefix server run build",
     "build:client": "npm --prefix client run build",
-    "build": "npm run build:client",
-    "seed": "npm --prefix server run prisma:seed"
+    "build": "npm --prefix client run build",
+    "seed": "npm --prefix server run prisma:seed",
+    "postinstall": "npm --prefix client install"
   }
 }
