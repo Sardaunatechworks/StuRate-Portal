@@ -20,9 +20,16 @@ import {
   Semester,
 } from '../types';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+const getBaseUrl = (): string => {
+  const envUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+  if (envUrl) {
+    const cleanUrl = envUrl.replace(/\/+$/, '');
+    return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+  }
+  return import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const API = axios.create({
   baseURL: API_BASE_URL,
