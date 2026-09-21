@@ -34,7 +34,7 @@ export const EvaluationPeriodPage: React.FC = () => {
     try {
       setIsLoading(true);
       const list = await periodApi.getAll();
-      setPeriods(list);
+      setPeriods(Array.isArray(list) ? list : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -134,7 +134,7 @@ export const EvaluationPeriodPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching evaluation periods..." />
-        ) : periods.length === 0 ? (
+        ) : (!periods || periods.length === 0) ? (
           <EmptyState
             icon={<Calendar className="w-6 h-6" />}
             title="No Evaluation Periods"
@@ -157,7 +157,7 @@ export const EvaluationPeriodPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {periods.map((p) => {
+                {(periods || []).map((p) => {
                   const statusVariant =
                     p.status === 'OPEN'
                       ? 'success'

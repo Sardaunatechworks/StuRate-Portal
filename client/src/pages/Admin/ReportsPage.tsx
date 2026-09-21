@@ -188,7 +188,7 @@ export const ReportsPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Calculating evaluation reports..." />
-        ) : !reportData || reportData.lecturerSummaries.length === 0 ? (
+        ) : !reportData || !reportData.lecturerSummaries || reportData.lecturerSummaries.length === 0 ? (
           <EmptyState
             icon={<BarChart3 className="w-6 h-6" />}
             title="No Evaluation Data"
@@ -221,7 +221,7 @@ export const ReportsPage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {reportData.lecturerSummaries.map((lec) => (
+                  {(reportData.lecturerSummaries || []).map((lec) => (
                     <tr
                       key={lec.lecturerId}
                       className="hover:bg-slate-50/60 transition-colors"

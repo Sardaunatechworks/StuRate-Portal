@@ -25,7 +25,7 @@ export const DepartmentsPage: React.FC = () => {
     try {
       setIsLoading(true);
       const list = await departmentApi.getAll();
-      setDepartments(list);
+      setDepartments(Array.isArray(list) ? list : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -112,7 +112,7 @@ export const DepartmentsPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching departments..." />
-        ) : departments.length === 0 ? (
+        ) : (!departments || departments.length === 0) ? (
           <EmptyState
             icon={<Building2 className="w-6 h-6" />}
             title="No Departments Configured"

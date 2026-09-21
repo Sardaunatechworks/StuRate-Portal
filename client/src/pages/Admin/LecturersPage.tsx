@@ -42,8 +42,8 @@ export const LecturersPage: React.FC = () => {
         }),
         departmentApi.getAll(),
       ]);
-      setLecturers(lecturerList);
-      setDepartments(deptList);
+      setLecturers(Array.isArray(lecturerList) ? lecturerList : []);
+      setDepartments(Array.isArray(deptList) ? deptList : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -211,7 +211,7 @@ export const LecturersPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching lecturers..." />
-        ) : lecturers.length === 0 ? (
+        ) : (!lecturers || lecturers.length === 0) ? (
           <EmptyState
             title="No Lecturers Found"
             description="No lecturer records match the specified search or filter criteria."
@@ -231,7 +231,7 @@ export const LecturersPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {lecturers.map((lec) => (
+                {(lecturers || []).map((lec) => (
                   <tr key={lec.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-4">
                       <div className="font-semibold text-slate-900">

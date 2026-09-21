@@ -47,8 +47,8 @@ export const StudentsPage: React.FC = () => {
         }),
         departmentApi.getAll(),
       ]);
-      setStudents(studentList);
-      setDepartments(deptList);
+      setStudents(Array.isArray(studentList) ? studentList : []);
+      setDepartments(Array.isArray(deptList) ? deptList : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -234,7 +234,7 @@ export const StudentsPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching students..." />
-        ) : students.length === 0 ? (
+        ) : (!students || students.length === 0) ? (
           <EmptyState
             title="No Students Found"
             description="There are currently no students matching the specified filters."
@@ -255,7 +255,7 @@ export const StudentsPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {students.map((s) => (
+                {(students || []).map((s) => (
                   <tr key={s.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-4">
                       <div className="font-semibold text-slate-900">

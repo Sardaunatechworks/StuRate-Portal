@@ -44,8 +44,8 @@ export const CoursesPage: React.FC = () => {
         }),
         departmentApi.getAll(),
       ]);
-      setCourses(courseList);
-      setDepartments(deptList);
+      setCourses(Array.isArray(courseList) ? courseList : []);
+      setDepartments(Array.isArray(deptList) ? deptList : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -212,7 +212,7 @@ export const CoursesPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching courses..." />
-        ) : courses.length === 0 ? (
+        ) : (!courses || courses.length === 0) ? (
           <EmptyState
             title="No Courses Found"
             description="No courses match the specified search or filter criteria."

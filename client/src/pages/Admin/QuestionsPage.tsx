@@ -31,7 +31,7 @@ export const QuestionsPage: React.FC = () => {
     try {
       setIsLoading(true);
       const list = await questionApi.getAll();
-      setQuestions(list);
+      setQuestions(Array.isArray(list) ? list : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -48,7 +48,7 @@ export const QuestionsPage: React.FC = () => {
     setFormData({
       category: '',
       questionText: '',
-      order: questions.length + 1,
+      order: (questions?.length || 0) + 1,
       isActive: true,
     });
     setModalError(null);
@@ -159,7 +159,7 @@ export const QuestionsPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching evaluation criteria..." />
-        ) : questions.length === 0 ? (
+        ) : (!questions || questions.length === 0) ? (
           <EmptyState
             title="No Criteria Configured"
             description="Add evaluation criteria to configure the student evaluation matrix."
@@ -179,7 +179,7 @@ export const QuestionsPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {questions.map((q) => (
+                {(questions || []).map((q) => (
                   <tr key={q.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-4 text-center font-bold text-slate-400">
                       {q.order}

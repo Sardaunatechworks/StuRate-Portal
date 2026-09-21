@@ -52,7 +52,7 @@ export const CommentsPage: React.FC = () => {
         </div>
       </div>
 
-      {comments.length === 0 ? (
+      {(!comments || comments.length === 0) ? (
         <EmptyState
           icon={<MessageSquareQuote className="w-6 h-6" />}
           title="No Student Comments"

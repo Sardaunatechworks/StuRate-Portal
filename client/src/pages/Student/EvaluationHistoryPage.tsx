@@ -44,7 +44,7 @@ export const EvaluationHistoryPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching your evaluation history..." />
-        ) : history.length === 0 ? (
+        ) : (!history || history.length === 0) ? (
           <EmptyState
             icon={<Clock className="w-6 h-6" />}
             title="No Past Evaluations"

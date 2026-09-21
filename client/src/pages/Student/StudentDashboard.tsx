@@ -189,7 +189,7 @@ export const StudentDashboard: React.FC = () => {
         title="Courses Assigned for Evaluation"
         subtitle="Submit structured ratings for each lecturer delivering courses this semester"
       >
-        {data.evaluations.length === 0 ? (
+        {(!data.evaluations || data.evaluations.length === 0) ? (
           <EmptyState
             icon={<BookOpen className="w-6 h-6" />}
             title="No Course Allocations"
@@ -197,7 +197,7 @@ export const StudentDashboard: React.FC = () => {
           />
         ) : (
           <div className="divide-y divide-slate-100">
-            {data.evaluations.map((item) => (
+            {(data.evaluations || []).map((item) => (
               <div
                 key={item.assignmentId}
                 className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4"

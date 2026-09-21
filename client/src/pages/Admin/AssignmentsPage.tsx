@@ -36,9 +36,9 @@ export const AssignmentsPage: React.FC = () => {
         lecturerApi.getAll(),
         courseApi.getAll(),
       ]);
-      setAssignments(assignList);
-      setLecturers(lecList);
-      setCourses(courseList);
+      setAssignments(Array.isArray(assignList) ? assignList : []);
+      setLecturers(Array.isArray(lecList) ? lecList : []);
+      setCourses(Array.isArray(courseList) ? courseList : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -131,7 +131,7 @@ export const AssignmentsPage: React.FC = () => {
       <Card>
         {isLoading ? (
           <LoadingSpinner message="Fetching course assignments..." />
-        ) : assignments.length === 0 ? (
+        ) : (!assignments || assignments.length === 0) ? (
           <EmptyState
             icon={<Link2 className="w-6 h-6" />}
             title="No Assignments Configured"
@@ -153,7 +153,7 @@ export const AssignmentsPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {assignments.map((a) => (
+                {(assignments || []).map((a) => (
                   <tr key={a.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-4">
                       <div className="font-mono font-bold text-emerald-800">
