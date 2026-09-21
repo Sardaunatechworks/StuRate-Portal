@@ -72,7 +72,7 @@ export const StudentDashboard: React.FC = () => {
             Academic Teaching Evaluation
           </h1>
           <p className="text-xs text-emerald-100/80 mt-1 max-w-xl">
-            Department of {data.student.department} • {data.student.level} Level
+            Department of {typeof data.student.department === 'object' && data.student.department !== null ? (data.student.department as any).name : data.student.department} • {data.student.level} Level
           </p>
         </div>
 

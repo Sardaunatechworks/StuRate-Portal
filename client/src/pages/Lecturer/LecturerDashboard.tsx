@@ -62,7 +62,7 @@ export const LecturerDashboard: React.FC = () => {
             Welcome, {data.lecturer.name}
           </h1>
           <p className="text-xs text-emerald-100/80 mt-1">
-            Department of {data.lecturer.department}
+            Department of {typeof data.lecturer.department === 'object' && data.lecturer.department !== null ? (data.lecturer.department as any).name : data.lecturer.department}
           </p>
         </div>
 
