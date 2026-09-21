@@ -59,11 +59,23 @@ API.interceptors.response.use(
   }
 );
 
+// Helper to unpack both wrapped `{ data: ... }` and direct payload responses
+const unpack = <T>(res: any): T => {
+  if (res && res.data !== undefined) {
+    if (res.data.data !== undefined) return res.data.data as T;
+    return res.data as T;
+  }
+  return res as T;
+};
+
 // Auth APIs
 export const authApi = {
   login: async (credentials: { email: string; password: string }) => {
     const res = await API.post('/auth/login', credentials);
-    return res.data.data as { token: string; user: User };
+    const data = res.data?.data || res.data;
+    const token = data?.token || data?.accessToken || data?.jwt || res.data?.token;
+    const user = data?.user || (data?.role ? data : res.data?.user);
+    return { token, user } as { token: string; user: User };
   },
   signupStudent: async (data: {
     name: string;
@@ -74,39 +86,44 @@ export const authApi = {
     password: string;
   }) => {
     const res = await API.post('/auth/signup/student', data);
-    return res.data.data as { token: string; user: User };
+    const resData = res.data?.data || res.data;
+    const token = resData?.token || resData?.accessToken || resData?.jwt || res.data?.token;
+    const user = resData?.user || (resData?.role ? resData : res.data?.user);
+    return { token, user } as { token: string; user: User };
   },
   getMe: async () => {
     const res = await API.get('/auth/me');
-    return res.data.data as User;
+    const data = res.data?.data || res.data?.user || res.data;
+    return data as User;
   },
   changePassword: async (passwords: { currentPassword: string; newPassword: string }) => {
     const res = await API.post('/auth/change-password', passwords);
-    return res.data;
+    return unpack(res);
   },
   updateProfile: async (data: { name: string }) => {
     const res = await API.put('/auth/profile', data);
-    return res.data.data as User;
+    return unpack<User>(res);
   },
 };
 
 // Department APIs
+// Department APIs
 export const departmentApi = {
   getAll: async () => {
     const res = await API.get('/departments');
-    return res.data.data as Department[];
+    return unpack<Department[]>(res);
   },
   getById: async (id: string) => {
     const res = await API.get(`/departments/${id}`);
-    return res.data.data as Department;
+    return unpack<Department>(res);
   },
   create: async (data: { name: string; code: string }) => {
     const res = await API.post('/departments', data);
-    return res.data.data as Department;
+    return unpack<Department>(res);
   },
   update: async (id: string, data: { name?: string; code?: string }) => {
     const res = await API.put(`/departments/${id}`, data);
-    return res.data.data as Department;
+    return unpack<Department>(res);
   },
 };
 
@@ -114,11 +131,11 @@ export const departmentApi = {
 export const courseApi = {
   getAll: async (params?: { departmentId?: string; level?: number; search?: string }) => {
     const res = await API.get('/courses', { params });
-    return res.data.data as Course[];
+    return unpack<Course[]>(res);
   },
   getById: async (id: string) => {
     const res = await API.get(`/courses/${id}`);
-    return res.data.data as Course;
+    return unpack<Course>(res);
   },
   create: async (data: {
     code: string;
@@ -128,11 +145,11 @@ export const courseApi = {
     level: number;
   }) => {
     const res = await API.post('/courses', data);
-    return res.data.data as Course;
+    return unpack<Course>(res);
   },
   update: async (id: string, data: Partial<Course>) => {
     const res = await API.put(`/courses/${id}`, data);
-    return res.data.data as Course;
+    return unpack<Course>(res);
   },
 };
 
@@ -140,11 +157,11 @@ export const courseApi = {
 export const lecturerApi = {
   getAll: async (params?: { departmentId?: string; search?: string }) => {
     const res = await API.get('/lecturers', { params });
-    return res.data.data as LecturerProfile[];
+    return unpack<LecturerProfile[]>(res);
   },
   getById: async (id: string) => {
     const res = await API.get(`/lecturers/${id}`);
-    return res.data.data as LecturerProfile;
+    return unpack<LecturerProfile>(res);
   },
   create: async (data: {
     name: string;
@@ -154,7 +171,7 @@ export const lecturerApi = {
     password: string;
   }) => {
     const res = await API.post('/lecturers', data);
-    return res.data.data as LecturerProfile;
+    return unpack<LecturerProfile>(res);
   },
   update: async (
     id: string,
@@ -168,7 +185,7 @@ export const lecturerApi = {
     }
   ) => {
     const res = await API.put(`/lecturers/${id}`, data);
-    return res.data.data as LecturerProfile;
+    return unpack<LecturerProfile>(res);
   },
 };
 
@@ -176,11 +193,11 @@ export const lecturerApi = {
 export const studentApi = {
   getAll: async (params?: { departmentId?: string; level?: number; search?: string }) => {
     const res = await API.get('/students', { params });
-    return res.data.data as StudentProfile[];
+    return unpack<StudentProfile[]>(res);
   },
   getById: async (id: string) => {
     const res = await API.get(`/students/${id}`);
-    return res.data.data as StudentProfile;
+    return unpack<StudentProfile>(res);
   },
   create: async (data: {
     name: string;
@@ -191,7 +208,7 @@ export const studentApi = {
     password: string;
   }) => {
     const res = await API.post('/students', data);
-    return res.data.data as StudentProfile;
+    return unpack<StudentProfile>(res);
   },
   update: async (
     id: string,
@@ -206,7 +223,7 @@ export const studentApi = {
     }
   ) => {
     const res = await API.put(`/students/${id}`, data);
-    return res.data.data as StudentProfile;
+    return unpack<StudentProfile>(res);
   },
 };
 
@@ -220,7 +237,7 @@ export const assignmentApi = {
     departmentId?: string;
   }) => {
     const res = await API.get('/course-assignments', { params });
-    return res.data.data as CourseAssignment[];
+    return unpack<CourseAssignment[]>(res);
   },
   create: async (data: {
     lecturerId: string;
@@ -229,11 +246,11 @@ export const assignmentApi = {
     semester: Semester;
   }) => {
     const res = await API.post('/course-assignments', data);
-    return res.data.data as CourseAssignment;
+    return unpack<CourseAssignment>(res);
   },
   delete: async (id: string) => {
     const res = await API.delete(`/course-assignments/${id}`);
-    return res.data;
+    return unpack(res);
   },
 };
 
@@ -241,11 +258,11 @@ export const assignmentApi = {
 export const periodApi = {
   getAll: async () => {
     const res = await API.get('/evaluation-periods');
-    return res.data.data as EvaluationPeriod[];
+    return unpack<EvaluationPeriod[]>(res);
   },
   getActive: async () => {
     const res = await API.get('/evaluation-periods/active');
-    return res.data.data as EvaluationPeriod | null;
+    return unpack<EvaluationPeriod | null>(res);
   },
   create: async (data: {
     title: string;
@@ -256,15 +273,15 @@ export const periodApi = {
     status?: PeriodStatus;
   }) => {
     const res = await API.post('/evaluation-periods', data);
-    return res.data.data as EvaluationPeriod;
+    return unpack<EvaluationPeriod>(res);
   },
   update: async (id: string, data: Partial<EvaluationPeriod>) => {
     const res = await API.put(`/evaluation-periods/${id}`, data);
-    return res.data.data as EvaluationPeriod;
+    return unpack<EvaluationPeriod>(res);
   },
   setStatus: async (id: string, status: PeriodStatus) => {
     const res = await API.patch(`/evaluation-periods/${id}/status`, { status });
-    return res.data.data as EvaluationPeriod;
+    return unpack<EvaluationPeriod>(res);
   },
 };
 
@@ -272,11 +289,11 @@ export const periodApi = {
 export const questionApi = {
   getAll: async () => {
     const res = await API.get('/evaluation-questions');
-    return res.data.data as EvaluationQuestion[];
+    return unpack<EvaluationQuestion[]>(res);
   },
   getActive: async () => {
     const res = await API.get('/evaluation-questions/active');
-    return res.data.data as EvaluationQuestion[];
+    return unpack<EvaluationQuestion[]>(res);
   },
   create: async (data: {
     category: string;
@@ -285,11 +302,11 @@ export const questionApi = {
     isActive?: boolean;
   }) => {
     const res = await API.post('/evaluation-questions', data);
-    return res.data.data as EvaluationQuestion;
+    return unpack<EvaluationQuestion>(res);
   },
   update: async (id: string, data: Partial<EvaluationQuestion>) => {
     const res = await API.put(`/evaluation-questions/${id}`, data);
-    return res.data.data as EvaluationQuestion;
+    return unpack<EvaluationQuestion>(res);
   },
 };
 
@@ -297,15 +314,15 @@ export const questionApi = {
 export const studentEvalApi = {
   getDashboard: async () => {
     const res = await API.get('/student/evaluations/dashboard');
-    return res.data.data as StudentDashboardData;
+    return unpack<StudentDashboardData>(res);
   },
   getEligible: async () => {
     const res = await API.get('/student/evaluations/eligible');
-    return res.data.data as EligibleEvaluation[];
+    return unpack<EligibleEvaluation[]>(res);
   },
   getFormDetails: async (assignmentId: string) => {
     const res = await API.get(`/student/evaluations/form/${assignmentId}`);
-    return res.data.data as {
+    return unpack<{
       assignment: {
         id: string;
         courseCode: string;
@@ -318,7 +335,7 @@ export const studentEvalApi = {
       };
       period: { id: string; title: string };
       questions: EvaluationQuestion[];
-    };
+    }>(res);
   },
   submit: async (data: {
     courseAssignmentId: string;
@@ -326,11 +343,11 @@ export const studentEvalApi = {
     ratings: Array<{ questionId: string; rating: number }>;
   }) => {
     const res = await API.post('/student/evaluations', data);
-    return res.data;
+    return unpack(res);
   },
   getHistory: async () => {
     const res = await API.get('/student/evaluations/history');
-    return res.data.data as EvaluationHistoryItem[];
+    return unpack<EvaluationHistoryItem[]>(res);
   },
 };
 
@@ -338,15 +355,15 @@ export const studentEvalApi = {
 export const lecturerPortalApi = {
   getDashboard: async () => {
     const res = await API.get('/lecturer/dashboard');
-    return res.data.data as LecturerDashboardData;
+    return unpack<LecturerDashboardData>(res);
   },
   getAnalytics: async () => {
     const res = await API.get('/lecturer/analytics');
-    return res.data.data as LecturerAnalyticsData;
+    return unpack<LecturerAnalyticsData>(res);
   },
   getComments: async () => {
     const res = await API.get('/lecturer/comments');
-    return res.data.data as LecturerCommentItem[];
+    return unpack<LecturerCommentItem[]>(res);
   },
 };
 
@@ -354,7 +371,7 @@ export const lecturerPortalApi = {
 export const adminPortalApi = {
   getDashboard: async () => {
     const res = await API.get('/admin/dashboard');
-    return res.data.data as AdminDashboardData;
+    return unpack<AdminDashboardData>(res);
   },
   getReports: async (params?: {
     departmentId?: string;
@@ -363,7 +380,7 @@ export const adminPortalApi = {
     evaluationPeriodId?: string;
   }) => {
     const res = await API.get('/admin/reports', { params });
-    return res.data.data as AdminReportsData;
+    return unpack<AdminReportsData>(res);
   },
 };
 
