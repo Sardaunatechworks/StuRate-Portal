@@ -47,10 +47,20 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor: standardize error extraction
+// Response interceptor: standardize error extraction and handle expired sessions
 API.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('srtes_token');
+      localStorage.removeItem('srtes_user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      const path = window.location.pathname;
+      if (path !== '/login' && path !== '/' && !path.startsWith('/signup')) {
+        window.location.href = '/login';
+      }
+    }
     const message =
       error.response?.data?.message ||
       error.response?.data?.errors?.[0]?.message ||

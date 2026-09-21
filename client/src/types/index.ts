@@ -102,6 +102,7 @@ export interface EvaluationPeriod {
   startDate: string;
   endDate: string;
   status: PeriodStatus;
+  isActive?: boolean;
   createdAt: string;
   _count?: {
     evaluations: number;

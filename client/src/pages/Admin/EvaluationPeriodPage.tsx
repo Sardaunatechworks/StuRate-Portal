@@ -158,10 +158,11 @@ export const EvaluationPeriodPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {(periods || []).map((p) => {
+                  const currentStatus = p.status || (p.isActive ? 'OPEN' : 'CLOSED');
                   const statusVariant =
-                    p.status === 'OPEN'
+                    currentStatus === 'OPEN'
                       ? 'success'
-                      : p.status === 'CLOSED'
+                      : currentStatus === 'CLOSED'
                       ? 'danger'
                       : 'warning';
 
@@ -181,14 +182,14 @@ export const EvaluationPeriodPage: React.FC = () => {
                         {new Date(p.endDate).toLocaleDateString()}
                       </td>
                       <td className="py-3 px-4">
-                        <Badge variant={statusVariant}>{p.status}</Badge>
+                        <Badge variant={statusVariant}>{currentStatus}</Badge>
                       </td>
                       <td className="py-3 px-4 text-center font-semibold text-slate-800">
                         {p._count?.evaluations || 0}
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
-                          {p.status !== 'OPEN' && (
+                          {currentStatus !== 'OPEN' && (
                             <button
                               onClick={() => handleStatusChange(p.id, 'OPEN')}
                               className="px-2 py-1 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center gap-1"
@@ -198,7 +199,7 @@ export const EvaluationPeriodPage: React.FC = () => {
                               <span>Open</span>
                             </button>
                           )}
-                          {p.status === 'OPEN' && (
+                          {currentStatus === 'OPEN' && (
                             <button
                               onClick={() => handleStatusChange(p.id, 'CLOSED')}
                               className="px-2 py-1 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 transition-colors flex items-center gap-1"
