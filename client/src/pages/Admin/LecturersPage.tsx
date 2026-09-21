@@ -90,6 +90,11 @@ export const LecturersPage: React.FC = () => {
     e.preventDefault();
     setModalError(null);
     setIsSubmitting(true);
+    if (!formData.departmentId) {
+      setModalError('Please select a valid academic department. If none are listed, please create a department first in the Departments tab.');
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       if (editingLecturer) {
