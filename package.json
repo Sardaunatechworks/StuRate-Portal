@@ -10,10 +10,14 @@
   "scripts": {
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
+    "dev": "npm --prefix server run dev",
+    "start": "npm --prefix server run start",
     "build:server": "npm --prefix server run build",
     "build:client": "npm --prefix client run build",
     "build": "npm --prefix client run build",
     "seed": "npm --prefix server run prisma:seed",
+    "db:push": "npx prisma db push --schema=server/prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=server/prisma/schema.prisma",
     "postinstall": "npm --prefix client install"
   }
 }
